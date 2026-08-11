@@ -1,0 +1,23 @@
+{
+  "name": "Chami Learning Adventure",
+  "short_name": "Chami",
+  "description": "Adaptive English and Ukrainian learning adventures for Auro and Teia.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F7F7FF",
+  "theme_color": "#7657E8",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
