@@ -1,12 +1,30 @@
-
-const CACHE = 'chami-pwa-v1';
+const CACHE = 'chami-v24-phonics-tactile-scaffolds';
 const ASSETS = [
   './',
   './index.html',
   './manifest.webmanifest',
+  './css/app.css',
+  './config/family.js',
+  './curriculum/data.js',
+  './js/app.js',
+  './js/ai-client.js',
+  './js/learner-model.js',
+  './js/calibration.js',
+  './js/transfer.js',
+  './js/curriculum-engine.js',
+  './js/curriculum-quality.js',
+  './js/phonics-engine.js',
+  './js/literacy-model.js',
+  './js/pwa.js',
   './icon-192.png',
   './icon-512.png',
-  './apple-touch-icon.png'
+  './apple-touch-icon.png',
+  './assets/auro.png',
+  './assets/teia.png',
+  './assets/chami.png',
+  './assets/peach.png',
+  './assets/world.png',
+  './assets/chami-logo.svg'
 ];
 
 self.addEventListener('install', event => {

@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "purpose": "Generate bounded educational content only. The deterministic Chami learning engine owns objectives, target words, learner state, scheduling and mastery.",
+  "request": {
+    "task": [
+      "micro_story",
+      "explanation"
+    ],
+    "learner": {
+      "profile_id": "string pseudonymous profile id",
+      "reading_band": "early_elementary | elementary"
+    },
+    "targets": {
+      "english": [
+        "controlled vocabulary target strings"
+      ],
+      "ukrainian": [
+        "controlled Ukrainian target strings"
+      ],
+      "known_words": [
+        "optional already-learned strings"
+      ]
+    },
+    "constraints": {
+      "max_words": "number",
+      "tone": "warm, playful, concrete",
+      "characters": [
+        "Chami",
+        "Peach"
+      ],
+      "no_new_ukrainian": true,
+      "no_open_ended_chat": true
+    }
+  },
+  "response": {
+    "title": "short string",
+    "content": "bounded educational text",
+    "check_question": "optional short comprehension question",
+    "check_answer": "optional answer",
+    "used_targets": [
+      "target words actually used"
+    ]
+  }
+}

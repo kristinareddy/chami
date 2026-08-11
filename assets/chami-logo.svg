@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 180" role="img" aria-labelledby="title desc">
+<title id="title">Chami Learning Adventure</title>
+<desc id="desc">Chami wordmark with a simple cream dog face, pink nose and yellow-green eyes.</desc>
+<rect width="640" height="180" rx="36" fill="#fffaf0"/>
+<g transform="translate(22 18)">
+  <path d="M45 38 C18 18 2 48 18 83 C23 94 30 103 42 109 L50 71 Z" fill="#dfb66f"/>
+  <path d="M115 38 C142 18 158 48 142 83 C137 94 130 103 118 109 L110 71 Z" fill="#dfb66f"/>
+  <ellipse cx="80" cy="78" rx="56" ry="54" fill="#f5ddab" stroke="#ffffff" stroke-width="8"/>
+  <ellipse cx="60" cy="66" rx="7" ry="9" fill="#9f9d42" stroke="#493c28" stroke-width="3"/>
+  <ellipse cx="100" cy="66" rx="7" ry="9" fill="#9f9d42" stroke="#493c28" stroke-width="3"/>
+  <ellipse cx="80" cy="91" rx="13" ry="10" fill="#d98f91" stroke="#8e5d5d" stroke-width="3"/>
+  <path d="M80 100 C80 110 68 114 62 107 M80 100 C80 110 92 114 98 107" fill="none" stroke="#694b38" stroke-width="4" stroke-linecap="round"/>
+</g>
+<text x="180" y="92" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="76" font-weight="800" fill="#573b78">CHAMI</text>
+<text x="186" y="132" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="3" fill="#d9829c">LEARN • EXPLORE • GROW</text>
+</svg>
