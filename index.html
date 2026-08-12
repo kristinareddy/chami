@@ -23,54 +23,99 @@
   <link rel="stylesheet" href="css/app.css">
 </head><body>
 <div class="app">
-<div class="top"><div class="brand-logo"><img src="assets/chami-logo.svg" alt="Chami Learning Adventure"></div><div id="custodyPill" class="pill"></div></div>
-<button id="soundToggle" class="sound-toggle" onclick="toggleChamiSound()">🔊 Sound on</button>
-<div class="profile"><button id="AuroraBtn" onclick="setChild('Aurora')">Auro</button><button id="TeiaBtn" onclick="setChild('Teia')">Teia</button></div>
-<div class="kid-welcome chami-welcome">
-  <img src="assets/chami.png" alt="Chami" style="width:78px;height:78px;object-fit:cover;border-radius:50%;border:3px solid white;box-shadow:0 6px 14px rgba(80,60,100,.15)"><div><div style="font-weight:950;font-size:20px" id="kidHello">Hi!</div>
-    <div class="tiny" id="kidMessage">Chami has your next adventure ready.</div>
+<header class="v25-header">
+  <div class="top"><div class="brand-logo"><img src="assets/chami-logo.svg" alt="Chami Learning Adventure"></div><div id="custodyPill" class="pill"></div></div>
+  <div class="v25-tools"><button id="soundToggle" class="sound-toggle" onclick="toggleChamiSound()">Sound on</button></div>
+  <div class="profile" aria-label="Choose learner">
+    <button id="AuroraBtn" onclick="setChild('Aurora')"><span id="AuroraAvatar" class="v26-expression-sprite v26-profile-avatar" aria-hidden="true"></span><span>Auro</span></button>
+    <button id="TeiaBtn" onclick="setChild('Teia')"><span id="TeiaAvatar" class="v26-expression-sprite v26-profile-avatar" aria-hidden="true"></span><span>Teia</span></button>
   </div>
-  <div class="sparkles" style="margin-left:auto">✨⭐</div>
-</div>
+  <div class="kid-welcome chami-welcome">
+    <img id="welcomeGuide" src="assets/characters/chami-v25.jpg" alt="Chami"><div><div id="kidHello">Hi!</div>
+      <div class="tiny" id="kidMessage">Chami has your next adventure ready.</div>
+    </div>
+  </div>
+</header>
 
 
 <section id="home" class="screen active">
-<div class="card chami-world-card" id="chamiWorldCard">
-  <div class="world-sky">
-    <div class="world-cloud c1"></div>
-    <div class="world-cloud c2"></div>
-  </div>
-  <div class="world-ground">
-    <div class="world-title" id="worldTitle">Your learning garden</div>
-    <div class="garden-grid" id="gardenGrid"></div>
-    <div class="world-characters">
-      <img src="assets/chami.png" alt="Chami">
-      <img src="assets/peach.png" alt="Peach">
+  <div class="v25-hero" id="v25Hero">
+    <div class="v25-scenery" aria-hidden="true"><span class="v25-cloud cloud-a"></span><span class="v25-cloud cloud-b"></span><span class="v25-hill hill-a"></span><span class="v25-hill hill-b"></span></div>
+    <div class="v25-hero-copy">
+      <span id="dayBadge" class="v25-eyebrow"></span>
+      <h1 id="heroTitle"></h1>
+      <p id="heroSub"></p>
+      <div class="v25-route-progress" aria-label="Today's learning progress"><div id="dayBar" class="bar"></div></div>
+      <div id="dayText" class="tiny"></div>
+      <button class="v25-start" onclick="startAdventure()"><span data-v25-icon="paw"></span><span id="v25StartLabel">Start my adventure</span></button>
     </div>
-    <div class="world-progress-row" id="worldStats"></div>
+    <div class="v25-character-scene v26-family-hero-wrap">
+      <button class="v26-family-hero" onclick="startAdventure()" aria-label="Start today's adventure with Auro, Teia, Chami, and Peach">
+        <span class="v26-family-hero-art" aria-hidden="true"></span>
+        <span class="v26-family-hero-label">All together — start the adventure</span>
+      </button>
+      <button class="v26-peach-helper" onclick="showPeachTip()" aria-label="Ask Peach for a helpful clue">
+        <span id="heroPeach" class="v26-expression-sprite v26-peach-face" aria-hidden="true"></span>
+        <span>Ask Peach</span>
+      </button>
+      <div id="peachTip" class="v25-peach-tip" role="status">Tap Peach for a helpful clue.</div>
+    </div>
   </div>
-</div>
-<img class="hero-art" src="assets/world.png" alt="Auro, Teia, Chami and Peach in the Chami learning world">
-<div class="character-row">
-  <div class="character-card"><img src="assets/auro.png" alt="Cartoon Auro"><b>Auro</b></div>
-  <div class="character-card"><img src="assets/teia.png" alt="Cartoon Teia"><b>Teia</b></div>
-  <div class="character-card"><img src="assets/chami.png" alt="Cartoon Chami"><b>Chami</b></div>
-  <div class="character-card"><img src="assets/peach.png" alt="Cartoon Peach"><b>Peach</b></div>
-</div>
-<div class="card hero"><span id="dayBadge" class="badge"></span><h1 id="heroTitle"></h1><p id="heroSub" class="muted"></p><div class="progress"><div id="dayBar" class="bar"></div></div><div id="dayText" class="tiny"></div><div style="height:12px"></div><button onclick="startDaily()">Let's go!</button></div>
-<div class="card"><h2>Today's Adventure</h2><div class="grid2"><div class="stat"><b id="engLevel"></b><span class="tiny">English level</span></div><div class="stat"><b id="ukLevel"></b><span class="tiny">Ukrainian level</span></div><div class="stat"><b id="dueCount"></b><span class="tiny">reviews due</span></div><div class="stat"><b id="newSlots"></b><span class="tiny">new slots today</span></div></div><p class="tiny" style="margin-top:10px">Difficulty moves independently for English and Ukrainian. High accuracy raises difficulty; struggle lowers it and adds more review.</p></div>
-<div class="card"><h2>Chami picks the right challenge</h2><p>Chami quietly changes the challenge as you learn. If something feels hard, you get more practice. If it feels easy, the next adventure gets a little trickier.</p></div>
 
-<div class="card">
-  <h2>My Adventure Shelf</h2>
-  <div class="reward-strip">
-    <div class="reward-chip">📖 Stories</div>
-    <div class="reward-chip">🎧 Listen</div>
-    <div class="reward-chip">✏️ Write</div>
-    <div class="reward-chip">🏆 Achievements</div>
-    <div class="reward-chip">🌱 My Garden</div>
+  <section class="card v26-scene-map" aria-labelledby="v26SceneTitle">
+    <div class="v25-section-heading"><div><span class="v25-kicker">CHOOSE A SCENE</span><h2 id="v26SceneTitle">Where should we go?</h2></div></div>
+    <p class="v25-card-intro">Every picture opens a real part of Chami.</p>
+    <div class="v26-scene-image-wrap">
+      <img src="assets/character-bible/family-scenes-v26.png" alt="Four illustrated Chami family adventures: meadow discovery, cozy learning, twilight stories, and creating together">
+      <div class="v26-scene-hotspots">
+        <button onclick="openV26Scene('discovery')"><span>Meadow discovery</span><small>Start adventure</small></button>
+        <button onclick="openV26Scene('learning')"><span>Cozy learning</span><small>Practise words</small></button>
+        <button onclick="openV26Scene('twilight')"><span>Twilight garden</span><small>Open stories</small></button>
+        <button onclick="openV26Scene('creation')"><span>Proud creation</span><small>See my growth</small></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="v26ChildWorld" class="card v26-child-world auro" aria-labelledby="v26ChildWorldTitle">
+    <div class="v25-section-heading"><div><span class="v25-kicker">MY CHARACTER</span><h2 id="v26ChildWorldTitle">Auro's Creative Meadow</h2></div></div>
+    <p id="v26ChildWorldIntro" class="v25-card-intro">Choose the face that feels most like you right now.</p>
+    <div class="v26-expression-feature">
+      <span id="v26ExpressionHero" class="v26-expression-sprite" role="img" aria-label="Auro feeling joyful"></span>
+      <div><span class="v25-kicker">CHAMI NOTICED</span><h3 id="v26ExpressionName">Joyful</h3><p id="v26ExpressionResponse" role="status">That joyful energy is ready for an adventure.</p></div>
+    </div>
+    <div id="v26ExpressionGrid" class="v26-expression-grid" aria-label="Choose an expression"></div>
+  </section>
+
+  <div class="v25-route card" aria-labelledby="routeTitle">
+    <div class="v25-section-heading"><div><span class="v25-kicker">CHAMI'S PLAN</span><h2 id="routeTitle">Your path today</h2></div><span id="v25RouteTime" class="v25-time">about 12 min</span></div>
+    <div id="v25RouteSteps" class="v25-route-steps"></div>
+    <div class="v25-adaptive-stats" aria-label="Current learning plan">
+      <span><b id="engLevel"></b> English</span><span><b id="ukLevel"></b> Ukrainian</span><span><b id="dueCount"></b> ready to review</span><span><b id="newSlots"></b> possible new</span>
+    </div>
   </div>
-</div>
+
+  <div class="v25-section-heading shelf-heading"><div><span class="v25-kicker">CHOOSE A PLACE</span><h2>Explore Chami's world</h2></div></div>
+  <div class="v25-module-grid">
+    <button class="v25-module words" onclick="openV25Module('words')"><span class="v25-module-icon" data-v25-icon="book"></span><span><b>Words</b><small>Meaning & memory</small></span></button>
+    <button class="v25-module listen" onclick="openV25Module('listen')"><span class="v25-module-icon" data-v25-icon="listen"></span><span><b>Listen</b><small>Ukrainian sounds</small></span></button>
+    <button class="v25-module build" onclick="openV25Module('build')"><span class="v25-module-icon" data-v25-icon="puzzle"></span><span><b>Build</b><small>Phonics & patterns</small></span></button>
+    <button class="v25-module stories" onclick="openV25Module('stories')"><span class="v25-module-icon" data-v25-icon="write"></span><span><b>Stories</b><small>Understand & express</small></span></button>
+    <button class="v25-module garden" onclick="openV25Module('garden')"><span class="v25-module-icon" data-v25-icon="garden"></span><span><b>Garden</b><small>See learning grow</small></span></button>
+    <button class="v25-module growth" onclick="openV25Module('progress')"><span class="v25-module-icon" data-v25-icon="star"></span><span><b>My Growth</b><small>Evidence & badges</small></span></button>
+  </div>
+
+  <div class="card v25-garden-card" id="myGarden">
+    <div class="v25-section-heading"><div><span class="v25-kicker">GROWN FROM LEARNING</span><h2>My garden</h2></div><button class="v25-text-button" onclick="go('progress')">See evidence</button></div>
+    <p class="v25-card-intro">Every plant grows from something you can really remember, decode, hear, or express.</p>
+    <div id="v25Garden" class="v25-garden-grid"></div>
+  </div>
+
+  <div class="card v25-achievement-preview">
+    <div class="v25-section-heading"><div><span class="v25-kicker">REAL MILESTONES</span><h2>Achievements</h2></div><button class="v25-text-button" onclick="go('progress')">See all</button></div>
+    <div id="homeAchievements" class="v25-badge-row"></div>
+  </div>
+
+  <div class="v25-legacy-world" aria-hidden="true"><span id="worldTitle"></span><div id="gardenGrid"></div><div id="worldStats"></div></div>
 </section>
 
 
@@ -83,8 +128,13 @@
 
   <div class="card adventure-card">
     <div class="adventure-character-wrap">
-      <img id="adventureCharacter" src="assets/chami.png" alt="Chami">
+      <img id="adventureCharacter" src="assets/characters/chami-v25.jpg" alt="Chami">
       <div id="adventureSpeech" class="speech-bubble">Your adventure is ready!</div>
+    </div>
+
+    <div class="v26-adventure-reaction" aria-live="polite">
+      <span id="v26AdventureFace" class="v26-expression-sprite" aria-hidden="true"></span>
+      <span id="v26AdventureFeeling">Ready to explore</span>
     </div>
 
     <div id="adventureStageBadge" class="badge">TODAY'S ADVENTURE</div>
@@ -131,8 +181,11 @@
 </section>
 
 <section id="progress" class="screen">
-<div class="card"><h2>Adaptive profile</h2><div class="levelBox"><b id="engProfile"></b><div class="tiny">English challenge score</div><div class="meter"><div id="engMeter"></div></div></div><div class="levelBox"><b id="ukProfile"></b><div class="tiny">Ukrainian challenge score</div><div class="meter"><div id="ukMeter"></div></div></div></div>
-<div class="card"><h2>Performance report</h2><div id="report"></div></div>
+<div id="v25ProgressHero" class="v25-progress-hero"></div>
+<div class="card v25-learning-trail"><span class="v25-kicker">LEARNING TRAIL</span><h2>What your brain has shown</h2><div id="v25EvidenceTrail" class="v25-evidence-trail"></div></div>
+<div class="card"><span class="v25-kicker">CHALLENGE LEVELS</span><h2>Chami's current settings</h2><div class="levelBox"><b id="engProfile"></b><div class="tiny">English challenge score</div><div class="meter"><div id="engMeter"></div></div></div><div class="levelBox"><b id="ukProfile"></b><div class="tiny">Ukrainian challenge score</div><div class="meter"><div id="ukMeter"></div></div></div></div>
+<div class="card"><span class="v25-kicker">ACHIEVEMENTS</span><h2>Milestones earned from evidence</h2><div id="v25Achievements" class="v25-achievement-grid"></div></div>
+<div class="card"><span class="v25-kicker">DETAILS</span><h2>Performance report</h2><div id="report"></div></div>
 </section>
 
 <section id="parent" class="screen">
@@ -190,12 +243,12 @@
 </section>
 </div>
 
-<nav><div class="navin">
-      <div class="navbtn active" onclick="go('home',this)">Home</div>
-      <div class="navbtn" onclick="startAdventure()">Adventure</div>
-      <div class="navbtn" onclick="go('words',this)">Practice</div>
-      <div class="navbtn" onclick="go('progress',this)">My Stars</div>
-      <div class="navbtn" onclick="go('parent',this)">Grown-ups</div>
+<nav aria-label="Main navigation"><div class="navin">
+      <div class="navbtn active" onclick="go('home',this)"><span data-v25-icon="home"></span><span>Home</span></div>
+      <div class="navbtn" onclick="startAdventure()"><span data-v25-icon="paw"></span><span>Adventure</span></div>
+      <div class="navbtn" onclick="go('words',this)"><span data-v25-icon="book"></span><span>Practice</span></div>
+      <div class="navbtn" onclick="go('progress',this)"><span data-v25-icon="chart"></span><span>My Growth</span></div>
+      <div class="navbtn" onclick="go('parent',this)"><span data-v25-icon="grownups"></span><span>Grown-ups</span></div>
     </div></nav>
 
 
@@ -203,6 +256,8 @@
 
 
   <script src="config/family.js"></script>
+  <script src="js/visual-world.js"></script>
+  <script src="js/illustrated-characters.js"></script>
   <script src="curriculum/data.js"></script>
   <script src="js/ai-client.js"></script>
   <script src="js/learner-model.js"></script>

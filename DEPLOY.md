@@ -1,6 +1,8 @@
-# Deploying Chami v24 to GitHub Pages
+# Deploying Chami v26 to GitHub Pages
 
-Upload the **contents** of `Chami_v24_Phonics_Tactile_Scaffolds.zip` to the repository root, preserving every folder. Do not upload only the changed files and do not place the whole release inside an extra wrapper folder.
+Upload the **contents** of `Chami_v26_Illustrated_Characters.zip` to the repository root, preserving every folder.
+
+Do not upload the ZIP itself, do not upload only changed files, and do not place the release inside an extra `Chami_v26_Illustrated_Characters/` wrapper folder. At the repository root you should see `index.html`, `service-worker.js`, `css/`, `js/`, `assets/`, and the other release folders.
 
 GitHub Pages should remain:
 
@@ -8,8 +10,18 @@ GitHub Pages should remain:
 - Branch: `main`
 - Folder: `/(root)`
 
-After the commit, wait for Pages to finish deploying, then open the live URL in a normal browser tab. Confirm the app loads and `js/phonics-engine.js` is present.
+## After committing
 
-The v24 service-worker cache is `chami-v24-phonics-tactile-scaffolds`. Once the new worker activates, it removes old Chami cache versions. If the installed Home Screen app still looks stale, fully close it, open the live browser version once, then reopen the installed app.
+1. Wait for the GitHub Pages deployment indicator to finish.
+2. Open `https://kristinareddy.github.io/chami/?v=25` in Safari or Chrome.
+3. Confirm Auro, Teia, Chami, and Peach appear as the new separate illustrations.
+4. Confirm Words, Listen, Build, Stories, Garden, and My Growth respond to taps.
+5. Open the installed Home Screen app only after the browser version has loaded once.
+6. Fully close/reopen the installed app if an older service worker view remains.
+7. Test one load offline after the new worker is active.
 
-Do not change the browser-storage key: v24 lazily migrates the existing v23 literacy record and preserves local Auro/Teia progress on the same device and site URL.
+The v26 cache name is `chami-v26-illustrated-characters`. When it activates, it removes older Chami cache versions and stores the new character module, the four approved PNGs, and the existing runtime assets.
+
+The browser storage key is unchanged. Uploading v26 at the same GitHub Pages URL preserves the existing local Auro/Teia progress on that device. Do not clear Safari website data unless you intentionally accept losing local prototype progress.
+
+After GitHub Pages finishes, verify that `assets/character-bible/` contains exactly the four approved PNG files. Real reference photographs must not be uploaded.

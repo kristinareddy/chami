@@ -9,7 +9,8 @@ window.CHAMI_FAMILY = {
     Aurora: {
       id: "Aurora",
       displayName: "Auro",
-      avatar: "assets/auro.png",
+      avatar: "assets/characters/auro-v25.jpg",
+      expressionSheet: "assets/character-bible/auro-expressions-v26.png",
       englishStartingLevel: 2,
       ukrainianStartingLevel: 1,
       literacy: {
@@ -23,7 +24,8 @@ window.CHAMI_FAMILY = {
     Teia: {
       id: "Teia",
       displayName: "Teia",
-      avatar: "assets/teia.png",
+      avatar: "assets/characters/teia-v25.jpg",
+      expressionSheet: "assets/character-bible/teia-expressions-v26.png",
       englishStartingLevel: 1,
       ukrainianStartingLevel: 1,
       literacy: {
@@ -37,12 +39,17 @@ window.CHAMI_FAMILY = {
   },
   characters: {
     Chami: {
-      image: "assets/chami.png",
+      image: "assets/characters/chami-v25.jpg",
       traits: ["cream coat", "pink nose", "yellow-green eyes"]
     },
     Peach: {
-      image: "assets/peach.png"
+      image: "assets/characters/peach-v25.jpg",
+      expressionSheet: "assets/character-bible/peach-expressions-v26.png"
     }
+  },
+  visuals: {
+    familyScenes: "assets/character-bible/family-scenes-v26.png",
+    characterBibleVersion: 26
   },
   learning: {
     maxNewEnglish: 5,

@@ -14,6 +14,33 @@ Signals include:
 - per-item difficulty,
 - repeated spaced retrieval.
 
+## v25 — Visual representations of learning
+
+v25 does not change the mastery thresholds or curriculum frontier. It changes how existing evidence is represented to the child.
+
+The garden has four evidence-linked plots:
+
+1. **English blooms** — mastered English memory records.
+2. **Ukrainian sunflowers** — mastered Ukrainian memory records.
+3. **Word-building sprouts** — successful phonics/decoding evidence from the literacy model.
+4. **Story blossoms** — context, expression, and spoken-attempt evidence.
+
+Achievements use equally explicit evidence: encountered words, Ukrainian listening, decoding attempts, free recall, multi-format mastery, and learning days. They are explanations of progress, not a second mastery system. Unlocking a badge never changes difficulty, review scheduling, curriculum access, or screen-time allocation.
+
+These thresholds are presentation thresholds only. They may be adjusted after observing whether Auro and Teia understand the connection between learning and growth; they must never be interpreted as psychometric scores.
+
+## v26 — Expression and scene choices are not learning evidence
+
+The v26 illustrated-character interactions are intentionally outside the adaptive curriculum model.
+
+- Choosing an Auro or Teia expression records only a presentation preference under `state.ui.characterExpressions`.
+- A “Tricky,” “Focused,” or “Celebrating” face does not count as a correct/incorrect answer.
+- Peach’s displayed pose is selected from current helper context but does not create or modify evidence.
+- Opening a family scene routes to an existing curriculum destination; it does not grant mastery, badges, points, or access to harder material.
+- The two children keep separate expression choices just as they keep separate learner models, but the UI preference and learning evidence remain structurally distinct.
+
+This boundary lets the app acknowledge a child’s feeling and personality without interpreting a decorative choice as a cognitive measurement.
+
 ## New-material throttle
 
 The target is a maximum, not a quota.

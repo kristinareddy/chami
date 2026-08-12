@@ -1,4 +1,4 @@
-const CACHE = 'chami-v24-phonics-tactile-scaffolds';
+const CACHE = 'chami-v26-illustrated-characters';
 const ASSETS = [
   './',
   './index.html',
@@ -7,6 +7,8 @@ const ASSETS = [
   './config/family.js',
   './curriculum/data.js',
   './js/app.js',
+  './js/visual-world.js',
+  './js/illustrated-characters.js',
   './js/ai-client.js',
   './js/learner-model.js',
   './js/calibration.js',
@@ -19,12 +21,15 @@ const ASSETS = [
   './icon-192.png',
   './icon-512.png',
   './apple-touch-icon.png',
-  './assets/auro.png',
-  './assets/teia.png',
-  './assets/chami.png',
-  './assets/peach.png',
-  './assets/world.png',
-  './assets/chami-logo.svg'
+  './assets/chami-logo.svg',
+  './assets/characters/auro-v25.jpg',
+  './assets/characters/teia-v25.jpg',
+  './assets/characters/chami-v25.jpg',
+  './assets/characters/peach-v25.jpg',
+  './assets/character-bible/auro-expressions-v26.png',
+  './assets/character-bible/teia-expressions-v26.png',
+  './assets/character-bible/peach-expressions-v26.png',
+  './assets/character-bible/family-scenes-v26.png'
 ];
 
 self.addEventListener('install', event => {

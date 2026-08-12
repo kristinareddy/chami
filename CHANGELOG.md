@@ -1,5 +1,39 @@
 # Changelog
 
+## v26 — Illustrated Characters
+- Added the approved high-resolution Auro, Teia, Peach, and four-scene family artwork under `assets/character-bible/`.
+- Added `js/illustrated-characters.js` as a pure character-sheet/sprite metadata module.
+- Replaced the Home hero’s loose portrait collage with one clickable all-together family scene.
+- Added a four-quadrant illustrated scene map that opens Adventure, Words, Stories, and My Growth.
+- Added distinct Auro and Teia character worlds with nine large, tappable expression choices each.
+- Preserved Auro’s green eyes/loose hair/coral identity and Teia’s blue eyes/single braid/purple identity across the app.
+- Stored each child’s chosen expression separately as presentation-only UI state.
+- Added the selected child’s expression to Adventure and My Growth.
+- Connected Peach’s nine-pose sheet to her existing evidence-aware helper clue.
+- Kept all character interactions outside learning evidence, mastery, difficulty, reviews, and achievements.
+- Excluded every real photographic reference from the release tree and deployment package.
+- Updated the offline cache to `chami-v26-illustrated-characters` and cached all four approved PNGs plus the new module.
+- Added deterministic character-boundary tests and a real-browser mobile/offline/click-navigation test.
+- Preserved the `chami-v12-state` key, independent learner models, v24 decoding scaffolds, and v25 evidence visuals.
+
+## v25 — Living Visual World
+- Replaced the static world image and decorative character row with a functional illustrated Home.
+- Added separate generated Auro, Teia, Chami and Peach artwork under `assets/characters/`.
+- Connected the active child's portrait to profile selection and My Growth.
+- Connected Chami to Today's Adventure and Peach to evidence-aware help.
+- Added six large illustrated destinations for Words, Listen, Build, Stories, Garden and My Growth.
+- Added `js/visual-world.js` with reusable inline-SVG icons and pure evidence-to-visual derivation.
+- Added four evidence-grown garden plots for English, Ukrainian, decoding and expression/context.
+- Added six named achievements with visible unlock evidence and no XP/streak dependency.
+- Rebuilt My Growth as a visual learning trail while preserving the detailed performance report.
+- Replaced remaining hard-coded v24 character references inside Adventure with configured v25 assets.
+- Fixed navigation active-state restoration when screens are opened programmatically.
+- Fixed the Adventure card width so mobile activities use the available screen.
+- Added reduced-motion support, large visual tap targets and accessible icon labels.
+- Updated offline cache to `chami-v25-living-visual-world` and included every new runtime asset.
+- Added deterministic v25 visual-model tests and a real-browser mobile/offline/accessibility test.
+- Preserved the v24 phonics/scaffold behavior and separate Auro/Teia local learner models.
+
 ## v24 — Phonics, Tactile Practice & Scaffold Fade-Out
 - Added `js/phonics-engine.js` with deterministic English letter-team tokenization and word parts.
 - Added hear-and-tap printed-word matching.

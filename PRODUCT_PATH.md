@@ -80,3 +80,28 @@ v24 strengthens the reusable core without making the family experience generic:
 - tactile interactions require taps only, making the core more portable across phones and tablets.
 
 Do not commercialize the scaffold thresholds from laboratory assumptions alone. First validate them through repeated real use with Auro and Teia, then pilot conservatively with outside families.
+
+## v25 product boundary
+
+v25 strengthens the emotional family experience while making the reusable boundary clearer:
+
+- Auro/Teia/Chami/Peach art paths live in `config/family.js`.
+- The visual engine receives any compatible learner profile and contains no family names.
+- Gardens and achievements are computed from the same direct evidence the learning engine already stores.
+- Inline-SVG icons can be reused across future themes without shipping an icon library.
+- A future parent-onboarding product could swap a character pack and keep the same garden/achievement rules.
+
+The current custom artwork is deliberately optimized for this family. Do not add public avatar upload, sharing, friends, leaderboards, or a marketplace before repeated child use shows the underlying learning loop is valuable and the privacy model is ready.
+
+## v26 product boundary
+
+v26 adds a reusable character-pack layer without turning private family identity into a platform feature:
+
+- `js/illustrated-characters.js` maps any compatible 3×3 expression atlas to named UI reactions.
+- Family-specific PNG paths remain in `config/family.js` and `assets/character-bible/`.
+- The reusable destination map knows only app routes, not educational scores or family photographs.
+- Expression choices are local presentation preferences and are not analytics, assessment, or inferred emotion recognition.
+- No camera, face recognition, photo upload, social sharing, avatar marketplace, or cloud identity service is added.
+- A future generic family can supply a different reviewed character pack while retaining the same adaptive engine.
+
+The leading v27 candidate remains **Adaptive Story Adventures**—short Chami/Peach stories that reuse mastered and due vocabulary—but the decision must follow the v26 child observation. If the richer Home creates hesitation or excessive scrolling, v27 should first simplify and reorder the illustrated experience.

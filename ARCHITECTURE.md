@@ -9,9 +9,12 @@ Chami is a static client-side PWA hosted on GitHub Pages.
 - `css/app.css`: all visual design and responsive rules.
 - `curriculum/data.js`: current English/Ukrainian curriculum bank.
 - `js/app.js`: learner state, adaptive engine, spaced repetition and UI behavior.
+- `js/visual-world.js`: pure visual derivation and reusable inline-SVG icon layer.
+- `js/illustrated-characters.js`: pure v26 character-sheet metadata, sprite coordinates, expression copy, and family-scene destinations.
 - `js/pwa.js`: service-worker registration.
 - `service-worker.js`: offline cache.
-- `assets/`: external character/world graphics.
+- `assets/characters/`: family-specific Auro, Teia, Chami and Peach v25 artwork.
+- `assets/character-bible/`: four approved v26 high-resolution character/scene PNGs. It contains no photographic references.
 - `manifest.webmanifest`: installation metadata.
 
 ## Why this refactor matters
@@ -82,6 +85,39 @@ Any future refactor must preserve:
 - service-worker registration,
 - app icons,
 - offline fallback.
+
+## v25 — Visual-state boundary
+
+`js/visual-world.js` is intentionally independent of DOM rendering and browser storage. It accepts a learner profile plus the existing literacy summary and returns:
+
+- evidence totals,
+- four deterministic garden plots/stages,
+- six achievement definitions with locked/unlocked state and evidence text,
+- configured character paths,
+- reusable inline-SVG interface icons.
+
+`js/app.js` remains responsible for reading the active profile and rendering those pure results into Home and My Growth. This keeps the direction one-way:
+
+**raw learner evidence → existing learner/literacy interpretation → visual derivation → UI**
+
+The visual layer never writes mastery, adds points, changes review dates, or selects curriculum. Auro/Teia/Chami/Peach file paths live in `config/family.js`; a future generic product can replace those assets without altering visual evidence logic.
+
+The v25 service worker caches the new visual module and the four optimized 960×960 character JPEGs. The existing `chami-v12-state` local-storage key and all v24 evidence structures are unchanged for backward compatibility.
+
+## v26 — Illustrated-character boundary
+
+`js/illustrated-characters.js` treats each 3×3 expression sheet as a sprite atlas. It provides fixed character keys, nine named expression records, deterministic `0% / 50% / 100%` background positions, and the four family-scene destinations. It has no access to storage, learner evidence, curriculum records, or the DOM.
+
+`js/app.js` owns the small integration layer:
+
+- render the selected expression into Home, Adventure, and My Growth;
+- keep Auro and Teia presentation choices separate under `state.ui.characterExpressions`;
+- update Peach’s pose when her existing helper message changes;
+- route the four scene quadrants to existing app screens.
+
+The v26 section contains no calls to `recordPerformance`, no writes to word history, and no mastery mutations. The unchanged `chami-v12-state` key preserves deployed progress; older saved objects gain the optional `ui` branch lazily.
+
+The four PNGs are cached by `chami-v26-illustrated-characters`. The browser never loads the private photo references used during the review process because those files are not part of the release tree.
 
 ## v12 boundary: core vs family configuration
 

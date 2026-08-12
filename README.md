@@ -2,6 +2,8 @@
 
 Chami is an installable child-first learning PWA for **Auro** and **Teia**.
 
+**Current release: v26 — Illustrated Characters.** v26 turns the approved character sheets and family scenes into functional app UI: a clickable four-scene Home map, separate interactive Auro and Teia expression worlds, a reactive Peach helper, and child-specific artwork inside Adventure and My Growth. The visual choices are stored as interface preferences only and never change mastery, difficulty, or review scheduling.
+
 It combines:
 - adaptive English vocabulary and reading development,
 - Ukrainian language learning from beginner level,
@@ -24,6 +26,8 @@ chami/
 │   └── app.css
 ├── js/
 │   ├── app.js
+│   ├── visual-world.js
+│   ├── illustrated-characters.js
 │   ├── phonics-engine.js
 │   ├── literacy-model.js
 │   └── pwa.js
@@ -32,11 +36,25 @@ chami/
 ├── curriculum/
 │   └── data.js
 ├── assets/
-│   ├── auro.png
-│   ├── teia.png
-│   ├── chami.png
-│   ├── peach.png
-│   └── world.png
+│   ├── chami-logo.svg
+│   └── characters/
+│       ├── auro-v25.jpg
+│       ├── teia-v25.jpg
+│       ├── chami-v25.jpg
+│       └── peach-v25.jpg
+│   └── character-bible/
+│       ├── auro-expressions-v26.png
+│       ├── teia-expressions-v26.png
+│       ├── peach-expressions-v26.png
+│       └── family-scenes-v26.png
+├── tests/
+│   ├── validate-v24.mjs
+│   ├── validate-v25.mjs
+│   ├── validate-v26.mjs
+│   ├── validate-release.mjs
+│   ├── browser-smoke.mjs
+│   └── browser-v25.mjs
+│   └── browser-v26.mjs
 ├── manifest.webmanifest
 ├── service-worker.js
 ├── apple-touch-icon.png
@@ -178,3 +196,32 @@ Chami now includes three bounded, tap-first English decoding formats:
 Scaffolding now moves through **full → guided → light → independent** only after varied repeated success. A short run of struggle restores help. This evidence is stored separately for Auro and Teia and never changes vocabulary mastery.
 
 v24 also repairs stale v23 integration references, gives phonics its own timing bucket, and updates the offline cache. Automated model, release and real-browser smoke tests live under `tests/`.
+
+## v25 — Living Visual World
+
+The child-facing visual layer is now functional rather than decorative:
+
+- the selected learner's portrait changes throughout Home and My Growth;
+- Chami starts and guides the adaptive adventure;
+- Peach gives a clue based on current review/scaffold state;
+- six illustrated Home destinations open real activities or evidence views;
+- four garden plots grow from English mastery, Ukrainian mastery, phonics evidence, and expression/context evidence;
+- six achievements unlock only from named learning evidence;
+- the progress screen translates stored evidence into a visual learning trail;
+- all new interface icons are reusable inline SVG, and new artwork is cached offline.
+
+v25 preserves the v24 storage key and learner-state schema. It does not reset either child's progress.
+
+## v26 — Illustrated Characters
+
+The approved artwork is now used as a sprite-based character system rather than as decorative screenshots:
+
+- Home opens with Auro, Teia, Chami, and Peach together.
+- The four-panel family illustration is a large-tap navigation map to Adventure, Words, Stories, and My Growth.
+- Auro and Teia each receive a different named expression world with nine tappable reactions.
+- Each child’s selected expression is saved separately under presentation-only UI state.
+- Peach changes expression when her evidence-aware helper clue changes.
+- Adventure and My Growth show the currently selected child with the correct expression sheet.
+- All four approved high-resolution PNG files are packaged and available offline.
+
+The real photographic references used during illustration review are not included in the app or deployment ZIP. v26 preserves the existing `chami-v12-state` storage key and every v24/v25 learning rule.

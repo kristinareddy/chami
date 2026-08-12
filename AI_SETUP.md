@@ -2,13 +2,15 @@
 
 ## Current status
 
-v24 retains the controlled AI architecture introduced in v17, but AI is **disabled by default**.
+v26 retains the controlled AI architecture introduced in v17, but AI is **disabled by default**.
 
 This is intentional. GitHub Pages is static hosting and must never contain an OpenAI API key.
 
 Without a server endpoint, Chami uses its deterministic local story/explanation fallback and remains fully functional.
 
-The v24 phonics engine and scaffold decisions are fully local and deterministic. They do not require AI, send child data to a model, or allow generated content to alter decoding evidence.
+The v24 phonics engine, scaffold decisions, v25 visual-state system, and v26 character interactions are fully local and deterministic. They do not require AI, send child data to a model, or allow generated content to alter learning evidence.
+
+The four approved v26 PNGs are static release assets. The running app does not call an image model, upload child data, or generate new portraits. The private photographs used during design review are not part of the release. Garden stages, achievements, interface icons, sprite positions, and character reactions are created locally from code and saved local state.
 
 ## To enable real AI later
 

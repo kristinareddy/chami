@@ -60,6 +60,34 @@ Keep analytics, adaptation details, curriculum settings and progress reports in 
 
 **The educational engine can be sophisticated; the child experience should feel simple, warm and playful.**
 
+## v25 — Purposeful visual-world rule
+
+The richer artwork is part of the interface, not a gallery laid on top of it.
+
+- The selected child's portrait communicates whose learner model is active and opens her learning trail.
+- Chami is the primary action/guide for Today's Adventure and learning feedback.
+- Peach provides secondary clues, story/context support and gentle review cues.
+- Illustrated module tiles must open a real activity or evidence view.
+- Garden growth must be reproducible from saved learning evidence.
+- Achievements must name the evidence that unlocked them.
+- Never add invented coins, XP, leaderboards, calendar streak pressure, or rewards for keeping the screen open.
+- Use short event-driven motion only; respect reduced-motion preferences.
+- Keep family artwork in configuration and reusable visual-state derivation in the core.
+
+v26 continues this rule by turning the approved character sheets and family scenes into large-tap destinations and reactions rather than adding a passive gallery.
+
+## v26 — Character consistency and interaction rule
+
+- Auro is always the older green-eyed character with loose golden hair, coral clothing, and no braid.
+- Teia is always the younger blue-eyed character with one side braid, a purple flower clip, purple clothing, and no overalls.
+- Peach keeps the same chestnut-and-cream markings in every pose.
+- Chami keeps his cream coat, pink nose, yellow-green eyes, brown collar, and gold tag.
+- Home must show the whole Chami family together.
+- Auro and Teia must each have their own visibly different character world.
+- Every scene hotspot and expression face must respond to a tap.
+- Expression selection is presentation-only UI state. It cannot change curriculum, difficulty, mastery, review timing, or achievement evidence.
+- Real family photographs are reference material only and must never be packaged in the PWA.
+
 
 ## v13 learning-quality rule
 
@@ -339,4 +367,10 @@ Acceptance policy:
 - two to three consecutive difficulties bring support back quickly,
 - no phonics result grants or removes word-meaning mastery.
 
-Where development stopped: v24 passes deterministic model checks, static release checks and a mobile-size Chrome smoke test. Next: deploy the complete v24 ZIP, test one short session with Teia and Auro, and record hesitation, audio reliability, button comfort and whether support feels correctly pitched before designing v25.
+Historical v24 gate: deterministic model checks, static release checks, and mobile Chrome smoke checks passed before the v25 visual layer was built.
+
+## Current release status — v26
+
+v26 integrates the approved Auro, Teia, Peach, and family-scene PNGs as a reusable sprite-based character system. The four family scenes open Adventure, Words, Stories, and My Growth. The two girls retain separate expression choices, and Peach reacts to her current helper clue. The character UI does not write learning evidence.
+
+Where development stopped: deterministic v26 character tests and the real-browser mobile/offline interaction test pass. Next: deploy the complete v26 ZIP and observe one short session with each child—especially which scene they tap, whether the expression choices feel genuinely like them, and whether the new art makes starting easier rather than lengthening screen time.

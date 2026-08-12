@@ -237,7 +237,7 @@ function renderAdventureStep(){
   const total=adventurePlan.length;
   adventureStepCount.textContent=`${Math.min(adventureIndex+1,total)} / ${total}`;
   adventureProgressBar.style.width=`${((adventureIndex)/Math.max(1,total-1))*100}%`;
-  adventureCharacter.src='assets/chami.png';
+  adventureCharacter.src=window.CHAMI_FAMILY.characters.Chami.image;
   adventureFeedback.style.display='none';
   adventureActions.className='adventure-actions';
   adventureActions.innerHTML='';
@@ -345,7 +345,7 @@ function renderAdventureStep(){
     adventureStageBadge.textContent='TINY STORY';
     adventureTitle.textContent='Chami & Peach found a clue';
     adventureSpeech.textContent='Listen for words your brain already knows.';
-    adventureCharacter.src='assets/peach.png';
+    adventureCharacter.src=window.CHAMI_FAMILY.characters.Peach.image;
     adventureBody.innerHTML=`
       <div class="story-box">
         Peach was <b>${a.t}</b> about a tiny door under a sunflower.
@@ -360,7 +360,7 @@ function renderAdventureStep(){
     adventureStageBadge.textContent='ADVENTURE COMPLETE';
     adventureTitle.textContent='You grew your garden!';
     adventureSpeech.textContent='Brains grow when they remember, struggle, try again, and discover.';
-    adventureCharacter.src='assets/chami.png';
+    adventureCharacter.src=window.CHAMI_FAMILY.characters.Chami.image;
     const learned=p().todayDone;
     adventureBody.innerHTML=`
       <div class="reward-burst">🌻⭐🐾</div>
@@ -1016,7 +1016,7 @@ function ukGameHeader(item,title,instruction){
   adventureStageBadge.textContent='UKRAINIAN PLAY';
   adventureTitle.textContent=title;
   adventureSpeech.textContent=instruction;
-  adventureCharacter.src='assets/peach.png';
+  adventureCharacter.src=window.CHAMI_FAMILY.characters.Peach.image;
   adventureFeedback.style.display='none';
   adventureActions.innerHTML=`<button class="ghost" onclick="speakText(adventureCurrent.item.t,'uk-UA')">🔊 Hear the word</button>`;
 }
@@ -2787,7 +2787,7 @@ function renderV24Build(step){
 }
 
 function renderV24PhonicsStep(step){
-  adventureCharacter.src='assets/chami.png';
+  adventureCharacter.src=window.CHAMI_FAMILY.characters.Chami.image;
   if(step.kind==='phonicsPatternMatch') renderV24PatternMatch(step);
   else if(step.kind==='phonicsBuild') renderV24Build(step);
   else renderV24WordMatch(step);
@@ -2936,3 +2936,300 @@ renderDeliveryMode=function(){
 };
 
 setTimeout(()=>{try{applyLiteracyMode();renderDeliveryMode();renderLiteracyCalibration();}catch(e){}},220);
+
+/* =========================================================
+   v25 — Living Visual World
+   Visuals reveal real learner state; they never create scores.
+   ========================================================= */
+
+function v25LiteracySummary(){
+  try{
+    return window.ChamiLiteracy.summary(p(),configuredReadingStage());
+  }catch(error){
+    return {phonics:{attempts:0,successes:0,variedKinds:0}};
+  }
+}
+
+function v25PlantMarkup(plot){
+  const height=[12,25,39,55,68][plot.level]||12;
+  const bloomSize=[0,0,21,28,34][plot.level]||0;
+  const bloom=plot.id==='ukrainian'?'✹':plot.id==='decoding'?'✦':plot.id==='expression'?'✿':'●';
+  const leaves=plot.level>=1
+    ? `<span class="v25-leaf" style="--leaf-y:${Math.max(6,height*.35)}px"></span>${plot.level>=2?`<span class="v25-leaf right" style="--leaf-y:${Math.max(13,height*.55)}px"></span>`:''}`
+    : '';
+  return `<div class="v25-plant-stage level-${plot.level}" aria-hidden="true">
+    <span class="v25-pot"></span>
+    <span class="v25-stem" style="--plant-height:${height}px"></span>
+    ${leaves}
+    <span class="v25-bloom" style="--plant-height:${height}px;--bloom-size:${bloomSize}px">${bloom}</span>
+  </div>`;
+}
+
+function v25AchievementMarkup(achievement,compact=false){
+  const visuals=window.ChamiVisuals;
+  if(compact){
+    return `<div class="v25-mini-badge ${achievement.unlocked?'unlocked':'locked'}">
+      <div class="badge-medallion">${visuals.icon(achievement.unlocked?achievement.icon:'lock',achievement.name)}</div>
+      <b>${visuals.escape(achievement.name)}</b>
+    </div>`;
+  }
+  return `<div class="v25-achievement ${achievement.unlocked?'unlocked':'locked'}">
+    <div class="badge-medallion">${visuals.icon(achievement.unlocked?achievement.icon:'lock',achievement.name)}</div>
+    <div><h3>${visuals.escape(achievement.name)}</h3><p>${visuals.escape(achievement.detail)}</p><span class="evidence">${visuals.escape(achievement.evidence)}</span></div>
+  </div>`;
+}
+
+function renderV25Icons(){
+  document.querySelectorAll('[data-v25-icon]').forEach(holder=>{
+    const name=holder.dataset.v25Icon;
+    if(holder.dataset.v25Ready===name) return;
+    holder.innerHTML=window.ChamiVisuals.icon(name);
+    holder.dataset.v25Ready=name;
+  });
+}
+
+function v25RouteMarkup(){
+  const enDue=dueWords('en').length;
+  const ukDue=dueWords('uk').length;
+  const steps=[
+    {icon:'heart',label:'Remember',note:`${enDue+ukDue} due`,className:(enDue+ukDue)?'due':'ready'},
+    {icon:'book',label:'English',note:`up to ${adaptiveNewSlots('en')} new`,className:'ready'},
+    {icon:'listen',label:'Ukrainian',note:`up to ${adaptiveNewSlots('uk')} new`,className:'ready'},
+    {icon:'star',label:'Use it',note:'challenge + story',className:'ready'}
+  ];
+  if(state.custody!=='mom'){
+    return `<div class="v25-route-step ready">${window.ChamiVisuals.icon('garden')}<b>Rest day</b><small>Your learning is safe.</small></div>`;
+  }
+  return steps.map(step=>`<div class="v25-route-step ${step.className}">${window.ChamiVisuals.icon(step.icon)}<b>${step.label}</b><small>${step.note}</small></div>`).join('');
+}
+
+function renderV25World(){
+  if(!window.ChamiVisuals || !document.getElementById('v25Hero')) return;
+  const visuals=window.ChamiVisuals;
+  const family=window.CHAMI_FAMILY;
+  const paths=visuals.characterPaths(family,state.child);
+  const literacy=v25LiteracySummary();
+  const summary=visuals.summary(p(),literacy);
+  const garden=visuals.garden(p(),literacy);
+  const achievements=visuals.achievements(p(),literacy);
+  const cfg=family.children[state.child];
+
+  const legacyHeroLearner=document.getElementById('heroLearner');
+  const legacyHeroChami=document.getElementById('heroChami');
+  const heroPeachNode=document.getElementById('heroPeach');
+  if(legacyHeroLearner){ legacyHeroLearner.src=paths.child; legacyHeroLearner.alt=cfg.displayName; }
+  if(legacyHeroChami) legacyHeroChami.src=paths.chami;
+  if(heroPeachNode?.tagName==='IMG') heroPeachNode.src=paths.peach;
+  welcomeGuide.src=paths.chami;
+  v25StartLabel.textContent=state.custody==='mom'?'Start my adventure':'See my learning trail';
+  v25RouteSteps.innerHTML=v25RouteMarkup();
+  v25RouteTime.textContent=state.custody==='mom'?`about ${Math.round((window.CHAMI_FAMILY.learning.targetScreenMinutes||12))} min`:'rest day';
+
+  v25Garden.innerHTML=garden.map(plot=>`<div class="v25-plot ${plot.color}">
+    ${v25PlantMarkup(plot)}
+    <h3>${visuals.escape(plot.name)}</h3>
+    <div class="v25-plot-progress"><span style="width:${plot.pct}%"></span></div>
+    <p>${plot.complete?'Blooming from strong evidence':`${plot.value} shown · next growth at ${plot.next}`}</p>
+  </div>`).join('');
+
+  const preview=[...achievements].sort((a,b)=>Number(b.unlocked)-Number(a.unlocked)).slice(0,3);
+  homeAchievements.innerHTML=preview.map(item=>v25AchievementMarkup(item,true)).join('');
+  v25Achievements.innerHTML=achievements.map(item=>v25AchievementMarkup(item)).join('');
+
+  const selectedExpression=v26SelectedExpression?.(state.child)||0;
+  const progressPortrait=window.ChamiCharacters
+    ? `<span id="v26ProgressExpression" class="v26-expression-sprite v26-progress-expression" role="img" aria-label="${visuals.escape(cfg.displayName)}"></span>`
+    : `<img src="${visuals.escape(paths.child)}" alt="${visuals.escape(cfg.displayName)}">`;
+  v25ProgressHero.innerHTML=`
+    ${progressPortrait}
+    <span class="v25-kicker">${visuals.escape(cfg.displayName.toUpperCase())}'S GROWTH</span>
+    <h1>Your learning trail</h1>
+    <p>Chami shows what your brain has demonstrated—not points, rankings, or a streak.</p>
+    <div class="v25-progress-chips"><span>${summary.mastered} strong memories</span><span>${summary.learningDays} learning days</span><span>${achievements.filter(a=>a.unlocked).length} milestones</span></div>`;
+  if(window.ChamiCharacters) v26ApplySprite(document.getElementById('v26ProgressExpression'),state.child,selectedExpression);
+
+  const evidence=[
+    ['book',summary.seen,'words encountered'],
+    ['heart',summary.recall,'recall proofs'],
+    ['listen',summary.listening,'listening proofs'],
+    ['puzzle',summary.decoding,'decoding attempts']
+  ];
+  v25EvidenceTrail.innerHTML=evidence.map(([icon,value,label])=>`<div class="v25-evidence-card">${visuals.icon(icon)}<b>${value}</b><small>${label}</small></div>`).join('');
+  renderV25Icons();
+}
+
+function showPeachTip(){
+  const due=dueWords('en').length+dueWords('uk').length;
+  const literacy=v25LiteracySummary();
+  const message=state.custody!=='mom'
+    ? 'Rest helps memory too. Your garden will be waiting.'
+    : due
+      ? `I found ${due} memor${due===1?'y':'ies'} ready for a gentle revisit. Chami put those first.`
+      : literacy.phonics.attempts
+        ? 'Your next path will keep the help level matched to your latest decoding practice.'
+        : 'Chami will start small, listen to your answers, and change the help as you learn.';
+  peachTip.textContent=message;
+  peachTip.classList.remove('reward-pop');
+  void peachTip.offsetWidth;
+  peachTip.classList.add('reward-pop');
+  if(p().soundEnabled) speakText(message,'en-US');
+}
+
+function openV25Module(module){
+  if(module==='words'){ setLang('en'); go('words'); return; }
+  if(module==='listen'){ go('ukrainian'); return; }
+  if(module==='stories'){ go('skills'); return; }
+  if(module==='progress'){ go('progress'); renderV25World(); return; }
+  if(module==='garden'){
+    go('home');
+    requestAnimationFrame(()=>document.getElementById('myGarden')?.scrollIntoView({behavior:'smooth',block:'start'}));
+    return;
+  }
+  startAdventure();
+}
+
+const _v25Go=go;
+go=function(id,el){
+  const navIndex=id==='home'?1:id==='adventure'?2:['words','test','skills','ukrainian'].includes(id)?3:id==='progress'?4:id==='parent'?5:0;
+  const target=el||(navIndex?document.querySelector(`.navbtn:nth-child(${navIndex})`):null);
+  _v25Go(id,target);
+  window.scrollTo({top:0,behavior:'auto'});
+};
+
+const _v25RenderAll=renderAll;
+renderAll=function(){
+  _v25RenderAll();
+  renderV25World();
+};
+
+setTimeout(()=>{try{renderV25World();}catch(error){console.error('v25 visual render',error);}},240);
+
+/* =========================================================
+   v26 — Illustrated Characters
+   Approved character sheets are interactive UI, never scores.
+   ========================================================= */
+
+function v26EnsureUiState(){
+  state.ui=state.ui||{};
+  state.ui.characterExpressions=state.ui.characterExpressions||{Aurora:0,Teia:0};
+  if(!Number.isInteger(state.ui.characterExpressions.Aurora)) state.ui.characterExpressions.Aurora=0;
+  if(!Number.isInteger(state.ui.characterExpressions.Teia)) state.ui.characterExpressions.Teia=0;
+  if(!Number.isInteger(state.ui.peachExpression)) state.ui.peachExpression=0;
+  return state.ui;
+}
+
+function v26SelectedExpression(child=state.child){
+  const ui=v26EnsureUiState();
+  return Math.max(0,Math.min(8,Number(ui.characterExpressions[child])||0));
+}
+
+function v26ApplySprite(element,character,index=0){
+  if(!element || !window.ChamiCharacters) return;
+  const item=window.ChamiCharacters.expression(character,index);
+  element.style.backgroundImage=`url('${item.sheet}')`;
+  element.style.backgroundPosition=window.ChamiCharacters.backgroundPosition(item.index);
+  element.dataset.character=item.character;
+  element.dataset.expression=String(item.index);
+}
+
+function renderV26Characters(){
+  if(!window.ChamiCharacters || !document.getElementById('v26ChildWorld')) return;
+  const visuals=window.ChamiVisuals;
+  const ui=v26EnsureUiState();
+  const child=state.child;
+  const selected=v26SelectedExpression(child);
+  const item=window.ChamiCharacters.expression(child,selected);
+  const displayName=childDisplayName();
+
+  v26ApplySprite(document.getElementById('AuroraAvatar'),'Aurora',0);
+  v26ApplySprite(document.getElementById('TeiaAvatar'),'Teia',0);
+  v26ApplySprite(document.getElementById('heroPeach'),'Peach',ui.peachExpression);
+  v26ApplySprite(document.getElementById('v26ExpressionHero'),child,selected);
+  v26ApplySprite(document.getElementById('v26ProgressExpression'),child,selected);
+
+  const childWorld=document.getElementById('v26ChildWorld');
+  childWorld.classList.toggle('auro',child==='Aurora');
+  childWorld.classList.toggle('teia',child==='Teia');
+  v26ChildWorldTitle.textContent=child==='Aurora'?"Auro's Creative Meadow":"Teia's Wonder Garden";
+  v26ChildWorldIntro.textContent=child==='Aurora'
+    ? 'Choose the Auro expression that feels most like you right now.'
+    : 'Choose the Teia expression that feels most like you right now.';
+  v26ExpressionName.textContent=item.label;
+  v26ExpressionResponse.textContent=item.message;
+  v26ExpressionHero.setAttribute('aria-label',`${displayName} feeling ${item.label.toLowerCase()}`);
+
+  v26ExpressionGrid.innerHTML=window.ChamiCharacters.expressions[child].map((expression,index)=>`
+    <button class="v26-expression-choice" onclick="chooseV26Expression(${index})" aria-label="${visuals.escape(displayName)} feels ${visuals.escape(expression.label)}" aria-pressed="${index===selected}">
+      <span class="v26-expression-sprite" style="${window.ChamiCharacters.spriteStyle(child,index)}" aria-hidden="true"></span>
+      <span>${visuals.escape(expression.label)}</span>
+    </button>`).join('');
+}
+
+function chooseV26Expression(index){
+  const ui=v26EnsureUiState();
+  const safeIndex=Math.max(0,Math.min(8,Number(index)||0));
+  ui.characterExpressions[state.child]=safeIndex;
+  save();
+  renderV26Characters();
+  v26ExpressionResponse.classList.remove('reward-pop');
+  void v26ExpressionResponse.offsetWidth;
+  v26ExpressionResponse.classList.add('reward-pop');
+  const item=window.ChamiCharacters.expression(state.child,safeIndex);
+  if(p().soundEnabled) speakText(item.message,'en-US');
+}
+
+function setV26PeachExpression(index){
+  const ui=v26EnsureUiState();
+  ui.peachExpression=Math.max(0,Math.min(8,Number(index)||0));
+  save();
+  v26ApplySprite(document.getElementById('heroPeach'),'Peach',ui.peachExpression);
+}
+
+function openV26Scene(sceneId){
+  const scene=window.ChamiCharacters.scene(sceneId);
+  if(scene.destination==='adventure'){ startAdventure(); return; }
+  if(scene.destination==='words'){ openV25Module('words'); return; }
+  if(scene.destination==='stories'){ openV25Module('stories'); return; }
+  openV25Module('progress');
+}
+
+function renderV26AdventureReaction(kind='welcome'){
+  const face=document.getElementById('v26AdventureFace');
+  const label=document.getElementById('v26AdventureFeeling');
+  if(!face || !label || !window.ChamiCharacters) return;
+  const indexes={rest:7,welcome:v26SelectedExpression(),word:3,listen:1,comprehension:3,story:2,reward:8,phonicsWordMatch:1,phonicsPatternMatch:3,phonicsBuild:3};
+  const index=Number.isInteger(indexes[kind])?indexes[kind]:3;
+  const item=window.ChamiCharacters.expression(state.child,index);
+  v26ApplySprite(face,state.child,index);
+  label.textContent=`${childDisplayName()}: ${item.label}`;
+}
+
+const _v26ShowPeachTip=showPeachTip;
+showPeachTip=function(){
+  _v26ShowPeachTip();
+  const due=dueWords('en').length+dueWords('uk').length;
+  const literacy=v25LiteracySummary();
+  const expression=state.custody!=='mom'?8:due?2:literacy.phonics.attempts?3:1;
+  setV26PeachExpression(expression);
+};
+
+const _v26RenderAdventureStep=renderAdventureStep;
+renderAdventureStep=function(){
+  _v26RenderAdventureStep();
+  renderV26AdventureReaction(adventureCurrent?.kind||adventurePlan[adventureIndex]?.kind||'welcome');
+};
+
+const _v26RenderAll=renderAll;
+renderAll=function(){
+  _v26RenderAll();
+  renderV26Characters();
+};
+
+setTimeout(()=>{
+  try{
+    renderV26Characters();
+    renderV26AdventureReaction('welcome');
+  }catch(error){
+    console.error('v26 character render',error);
+  }
+},260);
