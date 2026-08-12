@@ -1041,7 +1041,7 @@ function renderUkLetterHunt(step){
       </div>
       <div class="placement-question">Find <b>${target}</b> inside the letter garden.</div>
       <div class="letter-grid">
-        ${options.map(l=>`<button class="letter-tile" onclick="answerUkLetterHunt(this,${JSON.stringify(l)})">${l}</button>`).join('')}
+        ${options.map(l=>`<button class="letter-tile" onclick="answerUkLetterHunt(this,${JSON.stringify(l).replace(/"/g,'&quot;')})">${l}</button>`).join('')}
       </div>
     </div>`;
 }
@@ -1087,7 +1087,7 @@ function renderUkMissingLetter(step){
       </div>
       <div class="missing-word">${display}</div>
       <div class="tile-bank">
-        ${options.map(l=>`<button onclick="answerUkMissing(this,${JSON.stringify(l)})">${l}</button>`).join('')}
+        ${options.map(l=>`<button onclick="answerUkMissing(this,${JSON.stringify(l).replace(/"/g,'&quot;')})">${l}</button>`).join('')}
       </div>
     </div>`;
 }
@@ -1133,7 +1133,7 @@ function renderUkBuildWord(step){
         ${letters.map(()=>'<div class="word-slot"></div>').join('')}
       </div>
       <div id="ukTileBank" class="tile-bank">
-        ${step.buildBank.map((l,i)=>`<button id="uktile${i}" onclick="addUkBuildLetter(${i},${JSON.stringify(l)})">${l}</button>`).join('')}
+        ${step.buildBank.map((l,i)=>`<button id="uktile${i}" onclick="addUkBuildLetter(${i},${JSON.stringify(l).replace(/"/g,'&quot;')})">${l}</button>`).join('')}
       </div>
     </div>`;
   adventureActions.innerHTML=`
