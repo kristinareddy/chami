@@ -1,4 +1,4 @@
-const CACHE = 'chami-v26-illustrated-characters';
+const CACHE = 'chami-v27-uk-games-fix';
 const ASSETS = [
   './',
   './index.html',
